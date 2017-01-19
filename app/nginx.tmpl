@@ -13,7 +13,7 @@
 {{- $default_server := index (dict $host "" $default_host "default_server") $host }}
 
 {{- $proto := .FIRST.Labels.GetValue "rap.proto" "http" | or .PROTO  }}
-{{- $https_method := .FIRST.Labels.GetValue "rap.https_method" "redirect" }}
+{{- $https_method := .FIRST.Labels.GetValue "rap.https_method" "noredirect" }}
 
 {{- $vhostCert := (closest (dirList "/etc/nginx/certs") (printf "%s.crt" $host))}}
 

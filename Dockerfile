@@ -25,5 +25,7 @@ RUN chmod +x /app/letsencrypt.sh \
     && echo "daemon off;" >> /etc/nginx/nginx.conf \
     && sed -i 's/^http {/&\n    server_names_hash_bucket_size 128;/g' /etc/nginx/nginx.conf
 
+ADD proxy.conf /etc/nginx/proxy.conf
+
 ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh" ]
 CMD ["forego", "start", "-r"]
