@@ -40,8 +40,7 @@ Provided your DNS is setup to forward foo.bar.com to the a host running rancher-
 | `rap.port`                 | Port of the container to use ( only needed if several port are exposed ). Default `Expose Port` or `80`
 | `rap.proto`                | Protocol use to contact container ( http,https,uwsgi ). Default : `http`
 | `rap.cert_name`            | Certificat name to use for the virtual host. Default `rap.host`
-| `rap.https_method`         | Https method (redirect, noredirect). Default : `redirect`
-| `rap.le_host`              | Certificat to create/renew with Letsencrypt
+| `rap.https_method`         | Https method (redirect, noredirect). Default : `noredirect`
 | `rap.le_email`             | Email to use for Letsencrypt
 | `rap.le_test  `            | Set to true to use stagging letsencrypt server
 | `rap.http_listen_ports`    | External Port you want Rancher-Active-Proxy to listen http for this server ( Default : `80` )
@@ -211,9 +210,9 @@ to establish a connection.  A self-signed or generic cert named `default.crt` an
 will allow a client browser to make a SSL connection (likely w/ a warning) and subsequently receive
 a 503.
 
-To serve traffic in both SSL and non-SSL modes without redirecting to SSL, you can include the
-label  `rap.https_method=noredirect` (the default is `rap.https_method=redirect`).  You can also
-disable the non-SSL site entirely with `rap.https_method=nohttp`. `rap.https_method` must be specified
+To serve traffic in both SSL and non-SSL modes redirecting to SSL, you can include the label
+`rap.https_method=redirect` (the default is `rap.https_method=noredirect`).  You can also disable 
+the non-SSL site entirely with `rap.https_method=nohttp`. `rap.https_method` must be specified
 on each container for which you want to override the default behavior.  If `rap.https_method=noredirect` is
 used, Strict Transport Security (HSTS) is disabled to prevent HTTPS users from being redirected by the
 client.  If you cannot get to the HTTP site after changing this setting, your browser has probably cached
